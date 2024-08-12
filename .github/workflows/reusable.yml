@@ -2,10 +2,6 @@ name: Reusable Workflow
 
 on:
   workflow_call:
-    outputs:
-      example_output:
-        description: 'An example output value'
-        value: ${{ steps.set_output.outputs.example_value }}
 
 jobs:
   example_job:
@@ -13,7 +9,11 @@ jobs:
     steps:
       - name: Set output value
         id: set_output
-        run: echo "example_value=Hello, World!" >> $GITHUB_ENV
+        run: |
+          echo "example_value=Hello, World!" > output.txt
 
-    outputs:
-      example_output: ${{ steps.set_output.outputs.example_value }}
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: example-output
+          path: output.txt
