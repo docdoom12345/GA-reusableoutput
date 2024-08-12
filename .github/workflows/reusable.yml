@@ -5,12 +5,12 @@ on:
     outputs:
       example_output:
         description: 'An example output value'
-        value: ${{ steps.step_id.outputs.example_value }}
+        value: ${{ steps.set_output.outputs.example_value }}
 
 jobs:
   example_job:
     runs-on: ubuntu-latest
     steps:
       - name: Set output value
-        id: step_id
+        id: set_output
         run: echo "example_value=Hello, World!" >> $GITHUB_ENV
