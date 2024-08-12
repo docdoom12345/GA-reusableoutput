@@ -14,3 +14,6 @@ jobs:
       - name: Set output value
         id: set_output
         run: echo "example_value=Hello, World!" >> $GITHUB_ENV
+
+    outputs:
+      example_output: ${{ steps.set_output.outputs.example_value }}
